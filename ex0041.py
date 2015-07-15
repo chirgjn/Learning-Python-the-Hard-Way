@@ -25,8 +25,6 @@ PHRASE_FIRST = False
 if len(sys.argv) == 2 and sys.argv[1] == "english":
     PHRASE_FIRST = True
 
-print PHRASE_FIRST
-
 # load up the words from the website
 for word in urlopen(WORD_URL).readlines():
     WORDS.append(word.strip())
