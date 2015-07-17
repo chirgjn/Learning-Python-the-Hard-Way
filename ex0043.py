@@ -5,7 +5,7 @@ class Scene(object):
 
     def enter(self):
         print "This scene is not yet configured. Subclass it to implement enter()"
-            exit(1)
+        exit(1)
 
 
 class Engine(object):
@@ -15,7 +15,9 @@ class Engine(object):
 
     def play(self):
         current_scene = self.scene_map.opening_scene()
+
         while True:
+            print "\n- - - - - - - -"
             next_scene_name = current_scene.enter()
             current_scene = self.scene_map.next_scene(next_scene_name)
 
@@ -72,9 +74,9 @@ class CenralCorridor(Scene):
             print "The Gothon stops, tries not to laugh, then bursts out laughing and can't move."
             print "While he's laughing you run up and shoot him straight in the head"
             print "putting him down, then jump through the weapon armory door."
-            return 'death'
+            return 'laser_weapon_armory'
 
-        elif action == "tell a joke":
+        else:
             print "DOES NOT COMPUTE!"
             return 'central_corridor'
 
@@ -92,7 +94,7 @@ class LaserWeaponArmory(Scene):
         guess = raw_input("[keypad]> ")
         guesses = 0
 
-        while guess != code and guessses < 9:
+        while guess != code and guesses < 9:
             print "BZZZEDDD!"
             guesses += 1
             guess = raw_input("[keypad]> ")
@@ -179,13 +181,14 @@ class EscapePod(Scene):
 
 
 class Map(object):
-    self.scenes = {
+    scenes = {
         'death':Death(),
-        'cenral_corridor':CenralCorridor(),
+        'central_corridor':CenralCorridor(),
         'laser_weapon_armory':LaserWeaponArmory(),
         'the_bridge':TheBridge(),
         'escape_pod':EscapePod()
     }
+
     def __init__(self, start_scene):
         self.start_scene = start_scene
 
